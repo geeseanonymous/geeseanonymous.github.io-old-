@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <style>
+        body {
+            background-color: antiquewhite;
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 0;
+        }
+        button {
+            display: inline-block;
+        }
+        .center {
+            text-align: center;
+            position:  relative;
+        }
+        .ribbonMenu {
+            list-style-type: none;
+            font-size: 0px;
+            width: 100%;
+            background-color: deepskyblue;
+            position: absolute;
+            margin: 0;
+            padding: 0;
+            top: 0;
+            overflow: hidden;
+        }
+        .ribbonMenu li {
+            float: left;
+            background-color: white;
+        }
+        li a {
+            display: block;
+            color: black;
+            font-size: 16px;
+            text-transform: uppercase;
+            text-decoration: none;
+            padding: 14px 16px;
+        }
+        li a:hover {
+            background-color: grey;
+        }
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown a:hover {
+
+        }
+
+    </style>
+    <meta charset="utf-8" />
+    <title>this is the title tag</title>
+</head>
+<body>
+    <nav>
+        <ul class="ribbonMenu">
+            <li> <a href="#sectionOne">one</a> </li>
+            <li> <a href="#sectionTwo">two</a> </li>
+            <li> <a href="#sectionB">b</a> </li>
+            <li class="dropdown"> <a>drop</a> </li>
+        </ul>
+    </nav>
+
+    <div class="center">
+        <h1>anyone can do that</h1>
+        <p>im scatman</p>
+
+        <button onclick="toggleTime();getTime()">itme</button>
+        <button onclick="toggleDate();getTime()">date</button>
+        <button onclick="toggle24h();getTime()">12/24 hr</button>
+
+        <p id="date"></p>
+        <p id="time"></p>
+        <p id="debug"></p>
+    </div>
+    
+
+    <script>
+        var activeTime = false;
+        var activeDate = false;
+        var twelvehour = false;
+
+        function toggleTime() {
+            activeTime = !activeTime;
+        }
+        function toggleDate() {
+            activeDate = !activeDate;
+        }
+        function toggle24h() {
+            twelvehour = !twelvehour;
+        }
+
+        function getTime() {
+            var date = new Date();
+
+            if (activeDate) {
+                var year = date.getFullYear();
+                var month = date.getMonth() + 1;
+                var day = date.getDate();
+                document.getElementById("date").innerHTML = `date is ${day}/${month}/${year}`;
+            }
+            else {
+                document.getElementById("date").innerHTML = "";
+            }
+
+            if (activeTime) {
+                var ending = "";
+                var hours = checkDigits(date.getHours());
+                var minutes = checkDigits(date.getMinutes());
+                var seconds = checkDigits(date.getSeconds());
+                document.getElementById("time").innerHTML = "time is " + formatTime(hours,minutes,seconds,twelvehour);
+            }
+            else {
+                document.getElementById("time").innerHTML = "";
+            }
+
+            setTimeout(function(){ getTime() } , 500);
+        }
+
+        function checkDigits(number) {
+            if (number < 10) {
+                number = "0" + number;
+            }
+            return number;
+        }
+
+        function formatTime(hours,minutes,seconds,twelvehours) {
+            var ending = "";
+            if (twelvehours) {
+                if (hours > 11) {
+                    ending = "PM";
+                    hours = hours % 12;
+                }
+                else {
+                    ending = "AM";
+                }
+            } 
+            return `${hours}:${minutes}:${seconds} ${ending}`;
+        }
+    </script>
+
+</body>
+</html>
