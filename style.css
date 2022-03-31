@@ -8,6 +8,7 @@ button {
 }
 .center {
     text-align: center;
+    padding: 40px;
 }
 .ribbonMenu {
     list-style-type: none;
