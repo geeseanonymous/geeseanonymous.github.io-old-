@@ -36,3 +36,11 @@ li a {
 li a:hover {
     background-color: grey;
 }
+.dropdown-things {
+    position: relative;
+    display: none;
+    background-color: turquoise;
+}
+.dropdown:hover .dropdown-things {
+    display: block;
+}
